@@ -1,0 +1,47 @@
+name: "continuous-integration"
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: Build captainhook secrets on ${{ matrix.php }}
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      matrix:
+        php: ['8.0', '8.1', '8.2', '8.3']
+        experimental: [false]
+
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php }}
+        tools: composer:v2
+        extensions: mbstring
+
+    - name: PHP Version
+      run: php -v
+
+    - name: Update composer
+      run: composer self-update
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress --no-suggest
+
+    - name: Install tooling
+      run: GITHUB_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }} tools/phive --no-progress --home ./.phive install --force-accept-unsigned --trust-gpg-keys 4AA394086372C20A,31C7E470E2138192,8E730BA25823D8B5,CF1A108D0E7AE720,2DF45277AEF09A2F,51C67305FFC2E5C0
+
+    - name: Execute unit tests
+      run: tools/phpunit --no-coverage
+
+    - name: Check coding style
+      run: tools/phpcs --standard=psr12 src tests
+
+    - name: Static code analysis
+      run: tools/phpstan analyse
