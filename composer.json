@@ -30,7 +30,8 @@
         }
     },
     "require": {
-        "php": ">=8.0"
+        "php": ">=8.0",
+        "ext-mbstring": "*"
     },
     "scripts": {
         "post-install-cmd": "tools/phive install --force-accept-unsigned",
