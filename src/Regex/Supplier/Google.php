@@ -36,7 +36,7 @@ class Google implements Supplier
     {
         return [
             // API Key
-            '#' . Util::OPTIONAL_QUOTE . 'AIza[0-9A-Za-z-_]{35}' . Util::OPTIONAL_QUOTE . '#',
+            '#' . Util::OPTIONAL_QUOTE . 'AIza[0-9A-Za-z\-_]{35}' . Util::OPTIONAL_QUOTE . '#',
         ];
     }
 }

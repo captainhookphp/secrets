@@ -17,12 +17,12 @@ use CaptainHook\Secrets\Detector;
 use CaptainHook\Secrets\Regex\Supplier\Aws;
 use PHPUnit\Framework\TestCase;
 
-class GitHubTest extends TestCase
+class GoogleTest extends TestCase
 {
     public function testDetectSecret(): void
     {
-        $haystack = 'bar ghp_af4f573i21a7ce0h8715412ae94qwe464345 baz';
-        $detector = Detector::create()->useSuppliers(new GitHub());
+        $haystack = 'bar AIza4f573i21a7ce0h8715412ace0h8715412a3 baz';
+        $detector = Detector::create()->useSuppliers(new Google());
         $result   = $detector->detectIn($haystack);
 
         $this->assertTrue($result->wasSecretDetected());
@@ -31,8 +31,8 @@ class GitHubTest extends TestCase
 
     public function testDontDetectSecret(): void
     {
-        $haystack = 'bar ghp af4f573i21a github e94qwe464345 baz';
-        $detector = Detector::create()->useSuppliers(new GitHub());
+        $haystack = 'bar AIzaf4f573i21a... google e94qwe464345 AIzaAIzaAIzaAIzaAIza';
+        $detector = Detector::create()->useSuppliers(new Google());
         $result   = $detector->detectIn($haystack);
 
         $this->assertFalse($result->wasSecretDetected());

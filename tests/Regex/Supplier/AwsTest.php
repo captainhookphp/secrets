@@ -14,12 +14,11 @@ declare(strict_types=1);
 namespace CaptainHook\Secrets\Regex\Supplier;
 
 use CaptainHook\Secrets\Detector;
-use CaptainHook\Secrets\Regex\Supplier\Aws;
 use PHPUnit\Framework\TestCase;
 
 class AwsTest extends TestCase
 {
-    public function testDetectAws(): void
+    public function testDetectSecretToken(): void
     {
         $haystack = 'bar AKIAIOSFODNN7EXAMPLE baz';
         $detector = Detector::create()->useSuppliers(new Aws());
@@ -27,5 +26,34 @@ class AwsTest extends TestCase
 
         $this->assertTrue($result->wasSecretDetected());
         $this->assertCount(1, $result->matches());
+    }
+
+    public function testDetectSecretKey(): void
+    {
+        $haystack = '{"AwsSecretAccessKey": "ga34h0sd+7f654azt65dax+as00sdh+jb99mn+as"}';
+        $detector = Detector::create()->useSuppliers(new Aws());
+        $result   = $detector->detectIn($haystack);
+
+        $this->assertTrue($result->wasSecretDetected());
+        $this->assertCount(1, $result->matches());
+    }
+
+    public function testDetectSecretAccountId(): void
+    {
+        $haystack = '{"AwsAccountID": "7456-5437-4352"}';
+        $detector = Detector::create()->useSuppliers(new Aws());
+        $result   = $detector->detectIn($haystack);
+
+        $this->assertTrue($result->wasSecretDetected());
+        $this->assertCount(1, $result->matches());
+    }
+
+    public function testDontDetectSecret(): void
+    {
+        $haystack = 'Aws Account secret 5437....';
+        $detector = Detector::create()->useSuppliers(new Aws());
+        $result   = $detector->detectIn($haystack);
+
+        $this->assertFalse($result->wasSecretDetected());
     }
 }
