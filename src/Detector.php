@@ -30,7 +30,7 @@ class Detector
     /**
      * @var array<string>
      */
-    private array $patterns;
+    private array $patterns = [];
 
     /**
      * Creates a new Detector
