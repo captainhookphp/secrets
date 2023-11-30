@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace CaptainHook\Secrets\Regex\Supplier;
 
 use CaptainHook\Secrets\Detector;
-use CaptainHook\Secrets\Regex\Supplier\Aws;
 use PHPUnit\Framework\TestCase;
 
 class GitHubTest extends TestCase
