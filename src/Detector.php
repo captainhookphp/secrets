@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace CaptainHook\Secrets;
 
-use CaptainHook\Secrets\Detector\Result;
 use CaptainHook\Secrets\Regex\Supplier;
 use RuntimeException;
 
@@ -98,7 +97,7 @@ class Detector
      * Detect secrets in string
      *
      * @param string $content
-     * @return \CaptainHook\Secrets\Detector\Result
+     * @return \CaptainHook\Secrets\Result
      */
     public function detectIn(string $content): Result
     {

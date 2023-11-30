@@ -46,11 +46,11 @@ class Aws implements Supplier
             // AWS secrets, keys, access token
             '#' . Util::OPTIONAL_QUOTE . self::AWS . '(SECRET|secret|Secret)?_?(ACCESS|access|Access)?_?(KEY|key|Key)'
             . Util::OPTIONAL_QUOTE . Util::CONNECT
-            . Util::OPTIONAL_QUOTE . '[A-Za-z0-9/\\+=]{40}' . Util::OPTIONAL_QUOTE . '#',
+            . Util::OPTIONAL_QUOTE . '([A-Za-z0-9/\\+=]{40})' . Util::OPTIONAL_QUOTE . '#',
 
             // AWS account id
             '#' . Util::OPTIONAL_QUOTE . self::AWS . '(ACCOUNT|account|Account)_?(ID|id|Id)?' . Util::OPTIONAL_QUOTE
-            . Util::CONNECT . Util::OPTIONAL_QUOTE . '[0-9]{4}\\-?[0-9]{4}\\-?[0-9]{4}' . Util::OPTIONAL_QUOTE . '#',
+            . Util::CONNECT . Util::OPTIONAL_QUOTE . '([0-9]{4}\\-?[0-9]{4}\\-?[0-9]{4})' . Util::OPTIONAL_QUOTE . '#',
         ];
     }
 }

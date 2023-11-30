@@ -37,7 +37,7 @@ class Password implements Supplier
         return [
             // Generic passwords
             '#password' . Util::OPTIONAL_QUOTE . Util::CONNECT . Util::OPTIONAL_QUOTE
-            . '[a-z\\-_\\#/\\+0-9]{16,}' . Util::OPTIONAL_QUOTE . '#i',
+            . '([a-z\\-_\\#/\\+0-9]{16,})' . Util::OPTIONAL_QUOTE . '#i',
         ];
     }
 }

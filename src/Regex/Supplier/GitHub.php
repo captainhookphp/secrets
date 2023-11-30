@@ -36,16 +36,16 @@ class GitHub implements Supplier
     {
         return [
             // Personal Access Token (Classic)
-            '#' . Util::OPTIONAL_QUOTE . 'ghp_[a-zA-Z0-9]{36}' . Util::OPTIONAL_QUOTE . '#',
+            '#' . Util::OPTIONAL_QUOTE . '(ghp_[a-zA-Z0-9]{36})' . Util::OPTIONAL_QUOTE . '#',
 
             // Personal Access Token (Fine-Grained)
-            '#' . Util::OPTIONAL_QUOTE . 'github_pat_[a-zA-Z0-9]{22}_[a-zA-Z0-9]{59}' . Util::OPTIONAL_QUOTE . '#',
+            '#' . Util::OPTIONAL_QUOTE . '(github_pat_[a-zA-Z0-9]{22}_[a-zA-Z0-9]{59})' . Util::OPTIONAL_QUOTE . '#',
 
             // User-To-Server Access Token
-            '#' . Util::OPTIONAL_QUOTE . 'ghu_[a-zA-Z0-9]{36}' . Util::OPTIONAL_QUOTE . '#',
+            '#' . Util::OPTIONAL_QUOTE . '(ghu_[a-zA-Z0-9]{36})' . Util::OPTIONAL_QUOTE . '#',
 
             // Server-To-Server Access Token
-            '#' . Util::OPTIONAL_QUOTE . 'ghs_[a-zA-Z0-9]{36}' . Util::OPTIONAL_QUOTE . '#',
+            '#' . Util::OPTIONAL_QUOTE . '(ghs_[a-zA-Z0-9]{36})' . Util::OPTIONAL_QUOTE . '#',
         ];
     }
 }

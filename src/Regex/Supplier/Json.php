@@ -9,23 +9,17 @@
  * file that was distributed with this source code.
  */
 
-declare(strict_types=1);
-
 namespace CaptainHook\Secrets\Regex\Supplier;
 
-use CaptainHook\Secrets\Regex\Supplier;
+use CaptainHook\Secrets\Regex\Grouped;
 
 /**
- * Google regex
+ * Find any possible string assignment in a json file
  *
- * Provides the regex to find Google secrets.
- *
- * @package CaptainHook-Secrets
- * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>
- * @link    https://github.com/captainhookphp/secrets
- * @since   Class available since Release 0.9.1
+ * Finds:
+ *  - "foo": "string"
  */
-class Google implements Supplier
+class Json implements Grouped
 {
     /**
      * Returns a list of patterns to check
@@ -35,8 +29,18 @@ class Google implements Supplier
     public function patterns(): array
     {
         return [
-            // API Key
-            '#' . Util::OPTIONAL_QUOTE . '(AIza[0-9A-Za-z\-_]{35})' . Util::OPTIONAL_QUOTE . '#',
+            // detecting any string assignment
+            '#:\\s*' . Util::QUOTE . '(.*?)' . Util::QUOTE . '#i',
         ];
+    }
+
+    /**
+     * Return capture group to access the password
+     *
+     * @return array<int>
+     */
+    public function indexes(): array
+    {
+        return [2];
     }
 }

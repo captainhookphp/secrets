@@ -36,7 +36,7 @@ class Stripe implements Supplier
     {
         return [
             // Standard API Key & Restricted API Key
-            '#' . Util::OPTIONAL_QUOTE . 'sk_live_[0-9a-z]{24}' . Util::OPTIONAL_QUOTE . '#',
+            '#' . Util::OPTIONAL_QUOTE . '(sk_live_[0-9a-z]{24})' . Util::OPTIONAL_QUOTE . '#',
         ];
     }
 }

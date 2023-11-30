@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 
-namespace CaptainHook\Secrets\Detector;
+namespace CaptainHook\Secrets;
 
 /**
- * Detection Result
+ * Result
  *
  * Holds all information about the executed detection
  *
